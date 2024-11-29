@@ -31,17 +31,25 @@ public class MainApp extends Application {
         MenuItem parallelExecutionMenu = new MenuItem("Párhuzamos Frissítés");
         MenuItem accountInfoMenu = new MenuItem("Számlainformációk");
         MenuItem currentPriceMenu = new MenuItem("Aktuális árak");
+        MenuItem openPositionMenu = new MenuItem("Pozíció nyitás");
+        MenuItem closePositionMenu = new MenuItem("Pozíció zárás");
 
         // Menüpontok hozzáadása
         databaseMenu.getItems().addAll(olvasMenu, olvas2Menu, irMenu, modositMenu, torolMenu);
         parallelMenu.getItems().add(parallelExecutionMenu);
 
-        // Forex menüelemek hozzáadása (ismételt hozzáadás elkerülése)
+        // Forex menüelemek hozzáadása
         if (!forexMenu.getItems().contains(accountInfoMenu)) {
             forexMenu.getItems().add(accountInfoMenu);
         }
         if (!forexMenu.getItems().contains(currentPriceMenu)) {
             forexMenu.getItems().add(currentPriceMenu);
+        }
+        if (!forexMenu.getItems().contains(openPositionMenu)) {
+            forexMenu.getItems().add(openPositionMenu);
+        }
+        if (!forexMenu.getItems().contains(closePositionMenu)) {
+            forexMenu.getItems().add(closePositionMenu);
         }
 
         // Menü hozzáadása a menüsávhoz
@@ -86,6 +94,16 @@ public class MainApp extends Application {
         currentPriceMenu.setOnAction(event -> {
             ForexPriceController forexPriceController = new ForexPriceController();
             forexPriceController.showInMainView(root);
+        });
+
+        openPositionMenu.setOnAction(event -> {
+            OpenPositionController openPositionController = new OpenPositionController();
+            openPositionController.showInMainView(root);
+        });
+
+        closePositionMenu.setOnAction(event -> {
+            ClosePositionController closePositionController = new ClosePositionController();
+            closePositionController.showInMainView(root);
         });
 
         // Menü megjelenítése a fő elrendezés tetején
