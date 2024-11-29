@@ -19,6 +19,7 @@ public class MainApp extends Application {
         // Menü létrehozása
         MenuBar menuBar = new MenuBar();
         Menu databaseMenu = new Menu("Adatbázis");
+        Menu parallelMenu = new Menu("Párhuzamos");
 
         // Menüpontok létrehozása
         MenuItem olvasMenu = new MenuItem("Olvas");
@@ -26,16 +27,14 @@ public class MainApp extends Application {
         MenuItem irMenu = new MenuItem("Ír");
         MenuItem modositMenu = new MenuItem("Módosít");
         MenuItem torolMenu = new MenuItem("Töröl");
+        MenuItem parallelExecutionMenu = new MenuItem("Párhuzamos Frissítés");
 
-        // Menüpontok hozzáadása a "Adatbázis" menühöz
+        // Menüpontok hozzáadása a "Adatbázis" és "Párhuzamos" menühöz
         databaseMenu.getItems().addAll(olvasMenu, olvas2Menu, irMenu, modositMenu, torolMenu);
-        System.out.println("Menüpontok hozzáadva: ");
-        databaseMenu.getItems().forEach(item -> System.out.println(item.getText()));
-
+        parallelMenu.getItems().add(parallelExecutionMenu);
 
         // Menü hozzáadása a menüsávhoz
-        menuBar.getMenus().add(databaseMenu);
-
+        menuBar.getMenus().addAll(databaseMenu, parallelMenu);
 
         // Menü eseménykezelők
         olvasMenu.setOnAction(event -> {
@@ -53,15 +52,21 @@ public class MainApp extends Application {
             irController.showInMainView(root);
         });
 
-        //.setOnAction(event -> {
-        //    ModositController modositController = new ModositController();
-        //    modositController.showInMainView(root);
-        //});
+        modositMenu.setOnAction(event -> {
+            ModositController modositController = new ModositController();
+            modositController.showInMainView(root);
+        });
 
-        //torolMenu.setOnAction(event -> {
-        //    TorolController torolController = new TorolController();
-        //    torolController.showInMainView(root);
-        //});
+        torolMenu.setOnAction(event -> {
+            TorolController torolController = new TorolController();
+            torolController.showInMainView(root);
+        });
+
+        // Párhuzamos frissítés menü eseménykezelő
+        parallelExecutionMenu.setOnAction(event -> {
+            ParallelController parallelController = new ParallelController();
+            parallelController.showInMainView(root);
+        });
 
         // Menü megjelenítése a fő elrendezés tetején
         root.setTop(menuBar);
