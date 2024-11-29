@@ -30,11 +30,19 @@ public class MainApp extends Application {
         MenuItem torolMenu = new MenuItem("Töröl");
         MenuItem parallelExecutionMenu = new MenuItem("Párhuzamos Frissítés");
         MenuItem accountInfoMenu = new MenuItem("Számlainformációk");
+        MenuItem currentPriceMenu = new MenuItem("Aktuális árak");
 
-        // Menüpontok hozzáadása a menükhöz
+        // Menüpontok hozzáadása
         databaseMenu.getItems().addAll(olvasMenu, olvas2Menu, irMenu, modositMenu, torolMenu);
         parallelMenu.getItems().add(parallelExecutionMenu);
-        forexMenu.getItems().add(accountInfoMenu);
+
+        // Forex menüelemek hozzáadása (ismételt hozzáadás elkerülése)
+        if (!forexMenu.getItems().contains(accountInfoMenu)) {
+            forexMenu.getItems().add(accountInfoMenu);
+        }
+        if (!forexMenu.getItems().contains(currentPriceMenu)) {
+            forexMenu.getItems().add(currentPriceMenu);
+        }
 
         // Menü hozzáadása a menüsávhoz
         menuBar.getMenus().addAll(databaseMenu, parallelMenu, forexMenu);
@@ -65,16 +73,19 @@ public class MainApp extends Application {
             torolController.showInMainView(root);
         });
 
-        // Párhuzamos frissítés menü eseménykezelő
         parallelExecutionMenu.setOnAction(event -> {
             ParallelController parallelController = new ParallelController();
             parallelController.showInMainView(root);
         });
-        forexMenu.getItems().add(accountInfoMenu);
-        // Forex számlainformációk menü eseménykezelő
+
         accountInfoMenu.setOnAction(event -> {
             ForexController forexController = new ForexController();
             forexController.showAccountInfo(root);
+        });
+
+        currentPriceMenu.setOnAction(event -> {
+            ForexPriceController forexPriceController = new ForexPriceController();
+            forexPriceController.showInMainView(root);
         });
 
         // Menü megjelenítése a fő elrendezés tetején
@@ -85,7 +96,6 @@ public class MainApp extends Application {
         stage.setTitle("JavaFX CRUD Alkalmazás");
         stage.setScene(scene);
         stage.show();
-
     }
 
     public static void main(String[] args) {
