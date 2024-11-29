@@ -5,18 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2824a600-1e63-48fb-af70-c89f25fd63a9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/recept/recept/CombinedData.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/recept/recept/DatabaseConnection.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/recept/recept/Etel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/recept/recept/IrController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/recept/recept/MainApp.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/recept/recept/Olvas2Controller.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/recept/recept/OlvasController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/recept/recept/TestConnection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/jdbc-api-1.4.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/sqlite-jdbc-3.47.1.0.jar" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/recept/recept/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/recept/recept/HelloApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/recept/recept/DatabaseConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/recept/recept/DatabaseConnection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/recept/recept/IrController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/recept/recept/IrController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/recept/recept/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/recept/recept/MainApp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/recept/recept/hello-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/recept/recept/hello-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,12 +61,13 @@
     "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.35402298",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RunManager">
     <configuration name="HelloApplication" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="com.recept.recept.HelloApplication" />
+      <option name="MAIN_CLASS_NAME" value="com.recept.recept.MainApp" />
       <module name="recept" />
       <method v="2">
         <option name="Make" enabled="true" />

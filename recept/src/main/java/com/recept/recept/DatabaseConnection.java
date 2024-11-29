@@ -1,33 +1,26 @@
 package com.recept.recept;
 
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
+
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DatabaseConnection {
-    // Adatbázis elérési útvonala
-    private static final String URL = "jdbc:sqlite:C:/adatbazis/adatok.db";
+    private static final HikariDataSource dataSource;
 
-    public static Connection getConnection() throws SQLException {
-        try {
-            // Biztosítjuk, hogy a JDBC driver betöltődik
-            Class.forName("org.sqlite.JDBC");
-        } catch (ClassNotFoundException e) {
-            throw new SQLException("Az SQLite JDBC driver nem található.", e);
-        }
-        // Kapcsolat az adatbázishoz
-        return DriverManager.getConnection(URL);
+    static {
+        HikariConfig config = new HikariConfig();
+        config.setJdbcUrl("jdbc:sqlite:C:/adatbazis/adatok.db");
+        config.setDriverClassName("org.sqlite.JDBC");
+        config.setMaximumPoolSize(1); // Csak egy kapcsolat engedélyezett egyszerre
+        config.setAutoCommit(true);
+
+        dataSource = new HikariDataSource(config);
+
     }
 
-    public class TestConnection {
-        public static void main(String[] args) {
-            try (Connection conn = DatabaseConnection.getConnection()) {
-                if (conn != null) {
-                    System.out.println("Kapcsolódás sikeres!");
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
+    public static Connection getConnection() throws SQLException {
+        return dataSource.getConnection();
     }
 }
