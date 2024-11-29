@@ -1,8 +1,8 @@
-module com.mozi.recept {
+module com.recept.recept {
     requires javafx.controls;
     requires javafx.fxml;
 
 
-    opens com.mozi.recept to javafx.fxml;
-    exports com.mozi.recept;
+    opens com.recept.recept to javafx.fxml;
+    exports com.recept.recept;
 }

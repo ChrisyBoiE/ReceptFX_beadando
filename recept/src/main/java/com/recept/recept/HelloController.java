@@ -1,4 +1,4 @@
-package com.mozi.recept;
+package com.recept.recept;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

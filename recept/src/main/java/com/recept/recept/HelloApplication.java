@@ -1,4 +1,4 @@
-package com.mozi.recept;
+package com.recept.recept;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
