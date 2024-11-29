@@ -20,6 +20,7 @@ public class MainApp extends Application {
         MenuBar menuBar = new MenuBar();
         Menu databaseMenu = new Menu("Adatbázis");
         Menu parallelMenu = new Menu("Párhuzamos");
+        Menu forexMenu = new Menu("Forex");
 
         // Menüpontok létrehozása
         MenuItem olvasMenu = new MenuItem("Olvas");
@@ -28,13 +29,15 @@ public class MainApp extends Application {
         MenuItem modositMenu = new MenuItem("Módosít");
         MenuItem torolMenu = new MenuItem("Töröl");
         MenuItem parallelExecutionMenu = new MenuItem("Párhuzamos Frissítés");
+        MenuItem accountInfoMenu = new MenuItem("Számlainformációk");
 
-        // Menüpontok hozzáadása a "Adatbázis" és "Párhuzamos" menühöz
+        // Menüpontok hozzáadása a menükhöz
         databaseMenu.getItems().addAll(olvasMenu, olvas2Menu, irMenu, modositMenu, torolMenu);
         parallelMenu.getItems().add(parallelExecutionMenu);
+        forexMenu.getItems().add(accountInfoMenu);
 
         // Menü hozzáadása a menüsávhoz
-        menuBar.getMenus().addAll(databaseMenu, parallelMenu);
+        menuBar.getMenus().addAll(databaseMenu, parallelMenu, forexMenu);
 
         // Menü eseménykezelők
         olvasMenu.setOnAction(event -> {
@@ -67,6 +70,12 @@ public class MainApp extends Application {
             ParallelController parallelController = new ParallelController();
             parallelController.showInMainView(root);
         });
+        forexMenu.getItems().add(accountInfoMenu);
+        // Forex számlainformációk menü eseménykezelő
+        accountInfoMenu.setOnAction(event -> {
+            ForexController forexController = new ForexController();
+            forexController.showAccountInfo(root);
+        });
 
         // Menü megjelenítése a fő elrendezés tetején
         root.setTop(menuBar);
@@ -76,6 +85,7 @@ public class MainApp extends Application {
         stage.setTitle("JavaFX CRUD Alkalmazás");
         stage.setScene(scene);
         stage.show();
+
     }
 
     public static void main(String[] args) {
