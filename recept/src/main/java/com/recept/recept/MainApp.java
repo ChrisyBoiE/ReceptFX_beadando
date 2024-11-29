@@ -53,15 +53,15 @@ public class MainApp extends Application {
             irController.showInMainView(root);
         });
 
-        //.setOnAction(event -> {
-        //    ModositController modositController = new ModositController();
-        //    modositController.showInMainView(root);
-        //});
+        modositMenu.setOnAction(event -> {
+            ModositController modositController = new ModositController();
+            modositController.showInMainView(root);
+        });
 
-        //torolMenu.setOnAction(event -> {
-        //    TorolController torolController = new TorolController();
-        //    torolController.showInMainView(root);
-        //});
+        torolMenu.setOnAction(event -> {
+            TorolController torolController = new TorolController();
+            torolController.showInMainView(root);
+        });
 
         // Menü megjelenítése a fő elrendezés tetején
         root.setTop(menuBar);

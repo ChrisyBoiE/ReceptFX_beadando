@@ -5,15 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2824a600-1e63-48fb-af70-c89f25fd63a9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/recept/recept/TestConnection.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/recept/recept/ModositController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/recept/recept/TorolController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/jdbc-api-1.4.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/sqlite-jdbc-3.47.1.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/recept/recept/DatabaseConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/recept/recept/DatabaseConnection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/recept/recept/IrController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/recept/recept/IrController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/recept/recept/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/recept/recept/MainApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
