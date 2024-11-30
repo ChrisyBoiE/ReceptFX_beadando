@@ -18,7 +18,7 @@ import java.net.http.HttpResponse;
 public class ForexPriceController {
 
     private static final String API_URL = "https://api-fxpractice.oanda.com/v3/pricing";
-    private static final String API_KEY = "0d5dc4b6290d7e4c79231934a2515051-1c59ba0673c3875fb4d43ae855b70d4b"; // Helyettesítsd a saját API-kulcsoddal
+    private static final String API_KEY = "78b8a8f4d9f1d83bab60a5641b3af8b0-908d6d4dd7e435a59083f3215ad320a9"; // Helyettesítsd a saját API-kulcsoddal
 
     private ComboBox<String> instrumentComboBox;
     private Label priceLabel;

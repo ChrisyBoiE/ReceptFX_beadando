@@ -31,26 +31,24 @@ public class MainApp extends Application {
         MenuItem parallelExecutionMenu = new MenuItem("Párhuzamos Frissítés");
         MenuItem accountInfoMenu = new MenuItem("Számlainformációk");
         MenuItem currentPriceMenu = new MenuItem("Aktuális árak");
+        MenuItem historicalPricesMenu = new MenuItem("Historikus árak");
         MenuItem openPositionMenu = new MenuItem("Pozíció nyitás");
         MenuItem closePositionMenu = new MenuItem("Pozíció zárás");
+        MenuItem openPositionsMenu = new MenuItem("Nyitott pozíciók");
 
         // Menüpontok hozzáadása
         databaseMenu.getItems().addAll(olvasMenu, olvas2Menu, irMenu, modositMenu, torolMenu);
         parallelMenu.getItems().add(parallelExecutionMenu);
 
         // Forex menüelemek hozzáadása
-        if (!forexMenu.getItems().contains(accountInfoMenu)) {
-            forexMenu.getItems().add(accountInfoMenu);
-        }
-        if (!forexMenu.getItems().contains(currentPriceMenu)) {
-            forexMenu.getItems().add(currentPriceMenu);
-        }
-        if (!forexMenu.getItems().contains(openPositionMenu)) {
-            forexMenu.getItems().add(openPositionMenu);
-        }
-        if (!forexMenu.getItems().contains(closePositionMenu)) {
-            forexMenu.getItems().add(closePositionMenu);
-        }
+        forexMenu.getItems().addAll(
+                accountInfoMenu,
+                currentPriceMenu,
+                historicalPricesMenu,
+                openPositionMenu,
+                closePositionMenu,
+                openPositionsMenu
+        );
 
         // Menü hozzáadása a menüsávhoz
         menuBar.getMenus().addAll(databaseMenu, parallelMenu, forexMenu);
@@ -71,39 +69,50 @@ public class MainApp extends Application {
             irController.showInMainView(root);
         });
 
-        //.setOnAction(event -> {
-        //    ModositController modositController = new ModositController();
-        //    modositController.showInMainView(root);
-        //});
+        modositMenu.setOnAction(event -> {
+            ModositController modositController = new ModositController();
+            modositController.showInMainView(root);
+        });
 
-        //torolMenu.setOnAction(event -> {
-        //    TorolController torolController = new TorolController();
-        //    torolController.showInMainView(root);
-        //});
+        torolMenu.setOnAction(event -> {
+            TorolController torolController = new TorolController();
+            torolController.showInMainView(root);
+        });
+
+        // Forex eseménykezelők
+        accountInfoMenu.setOnAction(event -> {
+            AccountInfoController controller = new AccountInfoController();
+            controller.showInMainView(root);
+        });
+
+        currentPriceMenu.setOnAction(event -> {
+            PricePollingController controller = new PricePollingController();
+            controller.showInMainView(root); // Aktuális árak megjelenítése és polling
+        });
+
+        historicalPricesMenu.setOnAction(event -> {
+            HistoricalPricesController controller = new HistoricalPricesController();
+            controller.showInMainView(root);
+        });
+
+        openPositionMenu.setOnAction(event -> {
+            OpenPositionController controller = new OpenPositionController();
+            controller.showInMainView(root);
+        });
+
+        closePositionMenu.setOnAction(event -> {
+            ClosePositionController controller = new ClosePositionController();
+            controller.showInMainView(root);
+        });
+
+        openPositionsMenu.setOnAction(event -> {
+            OpenPositionsController controller = new OpenPositionsController();
+            controller.showInMainView(root);
+        });
 
         parallelExecutionMenu.setOnAction(event -> {
             ParallelController parallelController = new ParallelController();
             parallelController.showInMainView(root);
-        });
-
-        accountInfoMenu.setOnAction(event -> {
-            ForexController forexController = new ForexController();
-            forexController.showAccountInfo(root);
-        });
-
-        currentPriceMenu.setOnAction(event -> {
-            ForexPriceController forexPriceController = new ForexPriceController();
-            forexPriceController.showInMainView(root);
-        });
-
-        openPositionMenu.setOnAction(event -> {
-            OpenPositionController openPositionController = new OpenPositionController();
-            openPositionController.showInMainView(root);
-        });
-
-        closePositionMenu.setOnAction(event -> {
-            ClosePositionController closePositionController = new ClosePositionController();
-            closePositionController.showInMainView(root);
         });
 
         // Menü megjelenítése a fő elrendezés tetején
@@ -111,7 +120,7 @@ public class MainApp extends Application {
 
         // Jelenet létrehozása és megjelenítése
         Scene scene = new Scene(root, 800, 600);
-        stage.setTitle("JavaFX CRUD Alkalmazás");
+        stage.setTitle("JavaFX Forex Alkalmazás");
         stage.setScene(scene);
         stage.show();
     }

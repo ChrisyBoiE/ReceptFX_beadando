@@ -16,7 +16,7 @@ import java.net.http.HttpResponse;
 
 public class ForexController {
     private static final String API_URL = "https://api-fxpractice.oanda.com/v3/accounts";
-    private static final String API_KEY = "YOUR_API_KEY_HERE"; // Helyettesítsd az API kulcsoddal
+    private static final String API_KEY = "78b8a8f4d9f1d83bab60a5641b3af8b0-908d6d4dd7e435a59083f3215ad320a9"; // Helyettesítsd az API kulcsoddal
 
     public void showAccountInfo(BorderPane root) {
         TableView<AccountInfo> table = new TableView<>();
