@@ -11,13 +11,12 @@ public class DatabaseConnection {
 
     static {
         HikariConfig config = new HikariConfig();
-        config.setJdbcUrl("jdbc:sqlite:C:/adatbazis/adatok.db");
+        config.setJdbcUrl("jdbc:sqlite:C:/adatok/adatok.db");
         config.setDriverClassName("org.sqlite.JDBC");
         config.setMaximumPoolSize(1); // Csak egy kapcsolat engedélyezett egyszerre
         config.setAutoCommit(true);
 
         dataSource = new HikariDataSource(config);
-
     }
 
     public static Connection getConnection() throws SQLException {
