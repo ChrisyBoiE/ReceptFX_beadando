@@ -1,40 +1,87 @@
 package com.recept.recept;
 
-import javafx.geometry.Insets;
-import javafx.scene.control.*;
+import com.oanda.v20.Context;
+import com.oanda.v20.ContextBuilder;
+import com.oanda.v20.account.AccountID;
+import com.oanda.v20.order.MarketOrderRequest;
+import com.oanda.v20.order.OrderCreateRequest;
+import com.oanda.v20.order.OrderCreateResponse;
+import com.oanda.v20.primitives.InstrumentName;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
 public class OpenPositionController {
+
     public void showInMainView(BorderPane root) {
-        VBox layout = new VBox(10);
-        layout.setPadding(new Insets(10));
+        // Devizapár kiválasztása
+        ComboBox<String> currencyPairBox = new ComboBox<>();
+        currencyPairBox.getItems().addAll("EUR_USD", "GBP_USD", "USD_JPY");
 
-        Label pairLabel = new Label("Devizapár:");
-        ComboBox<String> pairBox = new ComboBox<>();
-        pairBox.getItems().addAll("EUR/USD", "USD/JPY", "GBP/USD");
+        // Mennyiség kiválasztása (Spinner)
+        Spinner<Integer> quantitySpinner = new Spinner<>();
+        quantitySpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 1000, 10));
 
-        Label amountLabel = new Label("Mennyiség:");
-        TextField amountField = new TextField();
+        // Irány kiválasztása (vétel/eladás)
+        ComboBox<String> directionBox = new ComboBox<>();
+        directionBox.getItems().addAll("Vétel (Buy)", "Eladás (Sell)");
 
-        Label directionLabel = new Label("Irány:");
-        ToggleGroup directionGroup = new ToggleGroup();
-        RadioButton buyButton = new RadioButton("Vétel");
-        RadioButton sellButton = new RadioButton("Eladás");
-        buyButton.setToggleGroup(directionGroup);
-        sellButton.setToggleGroup(directionGroup);
+        // Pozíció nyitása gomb
+        Button openPositionButton = new Button("Pozíció nyitása");
 
-        Button openButton = new Button("Pozíció nyitás");
-        openButton.setOnAction(event -> {
-            String pair = pairBox.getValue();
-            String amount = amountField.getText();
-            String direction = buyButton.isSelected() ? "Vétel" : "Eladás";
+        openPositionButton.setOnAction(event -> {
+            String instrument = currencyPairBox.getValue();
+            Integer quantity = quantitySpinner.getValue();
+            String direction = directionBox.getValue();
 
-            // Itt implementáld az API hívást a pozíció megnyitására
-            System.out.println("Pozíció nyitása: " + pair + ", " + amount + ", " + direction);
+            if (instrument == null || quantity == null || direction == null) {
+                System.out.println("Hiba: Minden mezőt ki kell tölteni!");
+                return;
+            }
+
+            // Vétel esetén pozitív, eladás esetén negatív mennyiség
+            int units = direction.equals("Vétel (Buy)") ? quantity : -quantity;
+
+            // Pozíció nyitása
+            openPosition(instrument, units);
         });
 
-        layout.getChildren().addAll(pairLabel, pairBox, amountLabel, amountField, directionLabel, buyButton, sellButton, openButton);
+        // Layout beállítása
+        VBox layout = new VBox(currencyPairBox, quantitySpinner, directionBox, openPositionButton);
+        layout.setSpacing(10);
         root.setCenter(layout);
+    }
+
+    private void openPosition(String instrument, int units) {
+        System.out.println("Pozíció nyitása: " + instrument + ", Mennyiség: " + units);
+
+        Context ctx = new ContextBuilder(Config.URL)
+                .setToken(Config.TOKEN)
+                .setApplication("OpenPosition")
+                .build();
+
+        AccountID accountId = Config.ACCOUNTID;
+
+        try {
+            // Market Order létrehozása
+            OrderCreateRequest request = new OrderCreateRequest(accountId);
+            MarketOrderRequest marketOrderRequest = new MarketOrderRequest();
+            marketOrderRequest.setInstrument(new InstrumentName(instrument));
+            marketOrderRequest.setUnits(units);
+
+            request.setOrder(marketOrderRequest);
+
+            // API hívás a pozíció létrehozására
+            OrderCreateResponse response = ctx.order.create(request);
+
+            System.out.println("Pozíció sikeresen megnyitva. Transaction ID: " +
+                    response.getOrderFillTransaction().getId());
+        } catch (Exception e) {
+            System.err.println("Hiba történt a pozíció nyitása során: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 }
