@@ -16,13 +16,13 @@ public class MainApp extends Application {
         // Fő elrendezés létrehozása
         root = new BorderPane();
 
-        // Menü létrehozása
+        // Menü és menüpontok létrehozása
         MenuBar menuBar = new MenuBar();
+
         Menu databaseMenu = new Menu("Adatbázis");
         Menu parallelMenu = new Menu("Párhuzamos");
         Menu forexMenu = new Menu("Forex");
 
-        // Menüpontok létrehozása
         MenuItem olvasMenu = new MenuItem("Olvas");
         MenuItem olvas2Menu = new MenuItem("Olvas2");
         MenuItem irMenu = new MenuItem("Ír");
@@ -36,11 +36,9 @@ public class MainApp extends Application {
         MenuItem closePositionMenu = new MenuItem("Pozíció zárás");
         MenuItem openPositionsMenu = new MenuItem("Nyitott pozíciók");
 
-        // Menüpontok hozzáadása
+        // Menüpontok hozzárendelése a menükhöz
         databaseMenu.getItems().addAll(olvasMenu, olvas2Menu, irMenu, modositMenu, torolMenu);
         parallelMenu.getItems().add(parallelExecutionMenu);
-
-        // Forex menüelemek hozzáadása
         forexMenu.getItems().addAll(
                 accountInfoMenu,
                 currentPriceMenu,
@@ -50,10 +48,10 @@ public class MainApp extends Application {
                 openPositionsMenu
         );
 
-        // Menü hozzáadása a menüsávhoz
+        // Menük hozzáadása a MenüSávhoz
         menuBar.getMenus().addAll(databaseMenu, parallelMenu, forexMenu);
 
-        // Menü eseménykezelők
+        // Menü eseménykezelők (feltételezzük, hogy a controller osztályok léteznek és ugyanebben a csomagban vannak)
         olvasMenu.setOnAction(event -> {
             OlvasController olvasController = new OlvasController();
             olvasController.showInMainView(root);
@@ -79,7 +77,6 @@ public class MainApp extends Application {
             torolController.showInMainView(root);
         });
 
-        // Forex eseménykezelők
         accountInfoMenu.setOnAction(event -> {
             AccountInfoController controller = new AccountInfoController();
             controller.showInMainView(root);
@@ -87,7 +84,7 @@ public class MainApp extends Application {
 
         currentPriceMenu.setOnAction(event -> {
             PricePollingController controller = new PricePollingController();
-            controller.showInMainView(root); // Aktuális árak megjelenítése és polling
+            controller.showInMainView(root);
         });
 
         historicalPricesMenu.setOnAction(event -> {
@@ -115,10 +112,10 @@ public class MainApp extends Application {
             parallelController.showInMainView(root);
         });
 
-        // Menü megjelenítése a fő elrendezés tetején
+        // Menü elhelyezése a fő elrendezés tetején
         root.setTop(menuBar);
 
-        // Jelenet létrehozása és megjelenítése
+        // Jelenet és Stage beállítása
         Scene scene = new Scene(root, 800, 600);
         stage.setTitle("JavaFX Forex Alkalmazás");
         stage.setScene(scene);
@@ -126,6 +123,7 @@ public class MainApp extends Application {
     }
 
     public static void main(String[] args) {
-        launch();
+        // Indítás a MainApp osztály megadásával és az argumentumok átadásával
+        Application.launch(MainApp.class, args);
     }
 }
